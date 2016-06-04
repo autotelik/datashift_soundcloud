@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'devise'
+gem 'dotenv-rails'
+gem 'soundcloud'
+gem 'high_voltage', "~> 3.0" # Rails engine for static pages. https://github.com/thoughtbot/high_voltage
+gem 'pg', '~> 0.18.4' # Use Postgres for the DB
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
