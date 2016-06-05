@@ -1,0 +1,28 @@
+<%- content_for :navbar do -%>
+    <% if user_signed_in? %>
+         <% if policy(User).index? %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+              <%= User.model_name.human(count: 2) %>
+            </a>
+
+            <ul class="dropdown-menu">
+              <% if policy(User).index? %>
+                  <li><%= link_to t('.view_users'), admin_users_path %></li>
+              <% end %>
+
+              <% if policy(User).invite? %>
+                   <li><%= link_to t('devise.invite_user'), new_user_invitation_path %></li>
+              <% end %>
+            </ul>
+            </li>
+        <% end %>
+
+        <li><%= link_to t('devise.sign_out'), destroy_user_session_path, method: :delete %></li>
+    <% else %>
+        <li><%= link_to t('devise.sign_in'), new_user_session_path %></li>
+
+        <li><%= link_to t('devise.sign_up'), new_user_registration_path %></li>
+    <% end %>
+<%- end -%>
+
+<%- content_for(:navbar_right, current_user.email) if user_signed_in? -%>

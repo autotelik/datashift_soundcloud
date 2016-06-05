@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
+
+gem "pundit"
 gem 'devise'
+gem "devise_invitable"
+gem "rolify"
+
 gem 'dotenv-rails'
 gem 'soundcloud'
 gem 'high_voltage', "~> 3.0" # Rails engine for static pages. https://github.com/thoughtbot/high_voltage

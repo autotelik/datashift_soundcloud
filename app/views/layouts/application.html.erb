@@ -8,11 +8,31 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%-
+  render 'layouts/navbar'
+-%>
 
+<%= yield :body_start %>
 
-<%= yield %>
+<% if content_for?(:navbar) %>
+    <%= yield(:navbar) %>
+<% end %>
+
+<section class="<%= content_for?(:full_width) ? 'container-fluid' : 'container' %>">
+
+  <main role="main">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= content_for?(:content) ? yield(:content) : yield %>
+  </main>
+
+  <footer class="page-footer">
+    <%= yield :footer_top %>
+  </footer>
+</section>
+
+<%= yield :body_end %>
 
 </body>
 </html>
