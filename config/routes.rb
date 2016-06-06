@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  namespace :user do
+    root '/high_voltage/pages#show', id: 'dashboard'
+  end
+
+  get '/soundcloud/connect',    :to => 'soundcloud#connect',    :as => :soundcloud_connect
+  get '/soundcloud/connected',  :to => 'soundcloud#connected',  :as => :soundcloud_connected
+  get '/soundcloud/disconnect', :to => 'soundcloud#disconnect', :as => :soundcloud_disconnect
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
