@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+
+    <div class="dashboard">
+
+      <ul>
+        <li class="inline">
+          <%= link_to image_tag('btn-connect-sc-m.png'), main_app.soundcloud_connect_path %>
+        </li>
+
+        <li class="inline">
+          Check Followers who don;t Follow Back
+        <li><%= link_to 'Followers', followers_path %></li>
+        </li>
+
+        <li class="inline">
+          Create exclusion list
+        </li>
+      </ul>
+    </div>
+
+<% end %>

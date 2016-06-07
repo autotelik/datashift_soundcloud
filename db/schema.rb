@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 20160606190223) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",        default: 0
+    t.string   "soundcloud_user_id"
+    t.string   "soundcloud_username"
     t.string   "soundcloud_access_token"
     t.string   "soundcloud_refresh_token"
-    t.string   "soundcloud_expires_in"
+    t.string   "soundcloud_expires_at"
     t.string   "soundcloud_scope"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false

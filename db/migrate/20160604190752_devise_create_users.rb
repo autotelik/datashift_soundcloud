@@ -35,10 +35,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.index      :invitation_token, unique: true # for invitable
       t.index      :invited_by_id
 
-
+      t.string     :soundcloud_user_id
+      t.string     :soundcloud_username
       t.string     :soundcloud_access_token
       t.string     :soundcloud_refresh_token
-      t.string     :soundcloud_expires_in
+      t.string     :soundcloud_expires_at
       t.string     :soundcloud_scope
 
 

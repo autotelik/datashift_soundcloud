@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1>You currently have <%= @followers.size %> Followers</h1>
+
+<% @followers.each do |follower| %>
+    <ul>
+      <li> <%= follower.username %></li>
+    </ul>
+
+<% end %>
+
+<br/>

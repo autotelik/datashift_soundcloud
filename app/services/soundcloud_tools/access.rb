@@ -19,13 +19,13 @@ module SoundcloudTools
 
       puts "Connecting to soundcloud using settings in .env"
 
-      client = Soundcloud.new(
+      @client = Soundcloud.new(
         :client_id =>  ENV['CLIENT_ID'],
         :client_secret => ENV['CLIENT_SECRET'],
         :redirect_uri => ENV['REDIRECT_URI']
       )
-
-      client
+      puts "Connected using REDIRECT_URI #{ENV['REDIRECT_URI']}"
+      @client
     end
 
     def connect_client
