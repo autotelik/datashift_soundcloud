@@ -1,29 +1,52 @@
 class FollowersController < ApplicationController
 
+  include SoundcloudTools::Access
+  include SoundcloudTools::Connection
+
   before_action :authenticate_user!
 
   def index
-    page_size = 200
+    page_size = 50
 
-    max = 20
+    connect_soundcloud_client
 
-    client = Soundcloud.new(access_token: current_user.soundcloud_access_token)
+    # people I follow
+    followings = get_collection(client, '/me/followings', page_size)#, :order => 'created_at', :limit => page_size
+    sorted_by_username = followings.sort_by(&:username)
 
-    results = client.get '/me/followings', :order => 'created_at', :limit => page_size
+    followings_ids = followings.collect(&:id)
 
-    collection = results.collection
+    # people who follow me
+    followers = get_collection(client, '/me/followers', page_size)
 
-    until(results[:next_href].blank?)
+    followers_ids = followers.collect(&:id)
 
-      results = client.get(results["next_href"], :limit => page_size)
+    unfollow = followings_ids - followers_ids
 
-      puts "NEXT : #{results[:next_href].class} [#{results[:next_href]}]"
+    @followers = {}
 
-      collection += results.collection
+    sorted_by_username.each do |x|
+      @followers[x] = unfollow.include?(x.id)
     end
+=begin
+    sorted_by_username.each do |x|
+      status = begin
+        puts "WOAH", results.inspect
+        client.get("/users/#{x.id}/followings/#{current_user.soundcloud_user_id}")
+      rescue Soundcloud::ResponseError => e
+        puts e.message.inspect
+        puts "You are not following user #{x.id} (#{current_user.soundcloud_user_id})"
+        if e.response.status == '404'
+          :no_follow_back
+        else
+          :follows_back
+        end
+      end
+      @followers[x] = status
+    end
+=end
+    @followers
 
-    puts "You have #{collection.size} Followers"
-    @followers = collection.sort_by(&:username)
   end
 
 end

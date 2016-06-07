@@ -2,9 +2,10 @@
 
 <h1>You currently have <%= @followers.size %> Followers</h1>
 
-<% @followers.each do |follower| %>
+<% @followers.each do |follower, status| %>
     <ul>
-      <li> <%= follower.username %></li>
+      <li><%= follower.username %></li>
+      <li><%= status %></li>
     </ul>
 
 <% end %>

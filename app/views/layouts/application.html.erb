@@ -8,15 +8,9 @@
 </head>
 <body>
 
-<%-
-  render 'layouts/navbar'
--%>
+<%= render 'layouts/navbar' %>
 
 <%= yield :body_start %>
-
-<% if content_for?(:navbar) %>
-    <%= yield(:navbar) %>
-<% end %>
 
 <section class="<%= content_for?(:full_width) ? 'container-fluid' : 'container' %>">
 
