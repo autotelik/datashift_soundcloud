@@ -7,18 +7,6 @@ module SoundcloudTools
     attr_reader :client
     attr_reader  :redirect_uri
 
-    def get_collection( client, uri, page_size = 10 )
-      results = client.get uri, :order => 'created_at', :limit => page_size
-
-      collection = results.collection
-
-      until(results[:next_href].blank?)
-        results = client.get(results["next_href"])
-        collection += results.collection
-      end
-      collection
-    end
-
     def config_file
       File.join( Rails.root, "config", "soundcloud.config.yaml")
     end

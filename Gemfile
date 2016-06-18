@@ -10,6 +10,8 @@ gem 'dotenv-rails'
 gem 'soundcloud'
 gem 'high_voltage', "~> 3.0" # Rails engine for static pages. https://github.com/thoughtbot/high_voltage
 gem 'pg', '~> 0.18.4' # Use Postgres for the DB
+gem "reform", "~> 2.1"
+gem "reform-rails", "~> 0.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :whitelist_followers
   devise_for :users
 
   namespace :user do
@@ -9,8 +10,17 @@ Rails.application.routes.draw do
   get '/soundcloud/connected',  :to => 'soundcloud#connected',  :as => :soundcloud_connected
   get '/soundcloud/disconnect', :to => 'soundcloud#disconnect', :as => :soundcloud_disconnect
 
+  resources :followers do
+    collection do
+      delete  :unfollow_multiple, as: :unfollow
+    end
+  end
 
-  resources :followers
+  #map.resources :followers, :collection => { :update_multiple => :put }, as: :unfollow
+
+  #resource :follower do
+  #  post '/unfollow/:ids', to: 'followers#unfollow', as: :unfollow, on: :collection
+  #end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

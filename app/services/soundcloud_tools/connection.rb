@@ -4,8 +4,8 @@ module SoundcloudTools
 
   module Connection
 
-    def get_collection( client, uri, page_size = 10 )
-      results = client.get uri, :order => 'created_at', :limit => page_size
+    def get_collection( client, uri, options = {})
+      results = client.get uri, options
 
       collection = results.collection
 

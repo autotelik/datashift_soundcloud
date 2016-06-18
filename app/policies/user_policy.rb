@@ -1,5 +1,3 @@
-puts "LOADED"
-
 class UserPolicy < ApplicationPolicy
   def index?
     system_user?

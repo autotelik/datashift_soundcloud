@@ -1,13 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>You currently have <%= @followers.size %> Followers</h1>
+<h1>You currently have <%= form.following_by_username.size %> Followers</h1>
 
-<% @followers.each do |follower, status| %>
-    <ul>
-      <li><%= follower.username %></li>
-      <li><%= status %></li>
-    </ul>
+<%= form_for :unfollow_form, url: unfollow_followers_path, method: :delete do |f| %>
 
+    <% form.following_by_username.each do |follower| %>
+        <ul>
+          <li><%= follower.username %></li>
+          <% follower.each do |key, value| %>
+              <li><%= key %> : <%= value %></li>
+          <% end %>
+          <div class="checkbox">
+            <%= label_tag :unfollow do %>
+                <%= f.check_box :unfollow %>
+                <%= "unfollow" %>
+            <% end %>
+          </div>
+        </ul>
+
+    <% end %>
 <% end %>
 
-<br/>
