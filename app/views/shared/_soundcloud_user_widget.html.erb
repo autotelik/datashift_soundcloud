@@ -1,5 +1,3 @@
 <% if current_user %>
-    <h3>Connected as Soundcloud User</h3>
-    <%= current_user.soundcloud_username %>
-    <%= current_user.soundcloud_expires_at %>
+    <h3>Connected as Soundcloud User : <%= current_user.soundcloud_username %></h3>
 <% end %>

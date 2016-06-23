@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :followers do
     collection do
+      get  :index_no_follow_back, as: :no_follow_back
       delete  :unfollow_multiple, as: :unfollow
     end
   end

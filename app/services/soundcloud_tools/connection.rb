@@ -4,6 +4,12 @@ module SoundcloudTools
 
   module Connection
 
+    def get_page( client, uri, options = {})
+      results = client.get uri, options
+
+      results.collection
+    end
+
     def get_collection( client, uri, options = {})
       results = client.get uri, options
 
