@@ -4,6 +4,9 @@
   </p>
 
   <% if user_signed_in? %>
+
+      <%= render 'shared/dashboard' %>
+
       <% if policy(User).index? %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
             <%= User.model_name.human(count: 2) %>

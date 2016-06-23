@@ -1,18 +1,12 @@
 <% if user_signed_in? %>
 
+    <%= link_to image_tag('btn-connect-sc-m.png'), main_app.soundcloud_connect_path %>
+
     <div class="dashboard">
-      <ul>
-        <li class="inline">
-          <%= link_to image_tag('btn-connect-sc-m.png'), main_app.soundcloud_connect_path %>
-        </li>
+      <ul class="inline">
         <li class="inline"><%= link_to 'All Followers', followers_path %></li>
-
-        <li class="inline"><%= link_to 'No Follow back', no_follow_back_followers_path %></li>
-        </li>
-
-        <li class="inline">
-          Create exclusion list
-        </li>
+        <li class="inline"><%= link_to 'People you Follow', followings_path %></li>
+        <li class="inline"><%= link_to 'No Follow back', no_follow_back_followings_path %></li>
       </ul>
     </div>
 

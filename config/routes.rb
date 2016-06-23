@@ -10,12 +10,19 @@ Rails.application.routes.draw do
   get '/soundcloud/connected',  :to => 'soundcloud#connected',  :as => :soundcloud_connected
   get '/soundcloud/disconnect', :to => 'soundcloud#disconnect', :as => :soundcloud_disconnect
 
-  resources :followers do
+  resources :followings do
     collection do
-      get  :index_no_follow_back, as: :no_follow_back
-      delete  :unfollow_multiple, as: :unfollow
+      get    :index_no_follow_back, as: :no_follow_back
+      delete :unfollow_multiple,    as: :unfollow
     end
   end
+
+  resources :followers, only: :index do
+    collection do
+      post :follow_multiple, as: :follow
+    end
+  end
+
 
   #map.resources :followers, :collection => { :update_multiple => :put }, as: :unfollow
 

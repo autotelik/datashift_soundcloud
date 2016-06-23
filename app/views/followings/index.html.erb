@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>You currently Follow <%= form.following.size %> artists</h1>
+
+<%= form_for :unfollow_form, url: unfollow_followings_path, method: :delete do |f| %>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Follows Back?</th>
+        <th>Unfollow</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% form.following.each do |follower| %>
+          <tr>
+            <td>
+              <%= follower.username %> : <%= follower.id %>
+            </td>
+            <td>
+              <%  %w{followers_count followings_count comments_count reposts_count }.each do|key| %>
+                  <%= key %> : <%= follower[key] %>
+              <% end %>
+            </td>
+            <td>
+              <%= follower[:no_follow_back] ? "False" : "True" %>
+            </td>
+            <td>
+              <div class="checkbox">
+                <%= label_tag :unfollow do %>
+                    <%= f.check_box :unfollow,
+                                    {
+                                        multiple: true,
+                                        checked:false,
+                                        id: "unfollow=checkbox-#{follower.id}"
+                                    },
+                                    follower.id, nil %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="form-group">
+      <%= f.submit(".continue") %>
+    </div>
+
+<% end %>
+

@@ -1,31 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<h1>You currently have <%= form.following.size %> Followers</h1>
+<h1>You currently have <%= form.followers.size %> Followers</h1>
 
-<%= form_for :unfollow_form, url: unfollow_followers_path, method: :delete do |f| %>
+<%= form_for :followers_form, url: follow_followers_path, method: :delete do |f| %>
 
-    <% form.following_by_username.each do |follower| %>
-        <ul>
-          <li><%= follower.username %> : <%= follower.id %></li>
-          <%  %w{no_follow_back followers_count followings_count comments_count reposts_count }.each do|key| %>
-              <%= key %> : <%= follower[key] %>
-          <% end %>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Followers</th>
+        <th>Following</th>
+        <th>Comments</th>
+        <th>Reposts</th>
+        <th>Follow Back</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% form.followers.each do |follower| %>
+          <tr>
+            <td>
+              <%= follower.username %>
+            </td>
+            <td> <%= follower[:followers_count] %></td>
+            <td> <%= follower[:followings_count] %></td>
+            <td> <%= follower[:comments_count] %></td>
+            <td> <%= follower[:reposts_count] %></td>
 
-          <div class="checkbox">
-            <%= label_tag :unfollow do %>
-                <%= f.check_box :unfollow,
-                                {
-                                    multiple: true,
-                                    checked:false,
-                                    id: "unfollow=checkbox-#{follower.id}"
-                                },
-                                follower.id, nil %>
-                <%= "unfollow" %>
-            <% end %>
-          </div>
-        </ul>
+            <td>
+              <% if follower[:no_follow_back] %>
+                  <div class="checkbox">
+                    <%= label_tag :follow do %>
+                        <%=
+                          f.check_box :follow,
+                                      { multiple: true, checked:false, id: "follow=checkbox-#{follower.id}"},
+                                      follower.id, nil
+                        %>
+                    <% end %>
+                  </div>
+              <% end %>
 
-    <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
     <div class="form-group">
       <%= f.submit(".continue") %>
