@@ -1,9 +1,7 @@
 class FollowingsController < ApplicationController
 
   include SoundcloudTools::Access
-  include SoundcloudTools::Connection
 
-  before_action :authenticate_user!
   before_action :authenticate_user!
 
   def form_factory
@@ -13,20 +11,11 @@ class FollowingsController < ApplicationController
   def unfollow_multiple
     connect_soundcloud_client
 
-    ids = params[:unfollow_form].fetch(:unfollow, []) #"=>["66651257", "34839820"]}
-
-    puts "ids", ids.inspect
+    ids = params[:unfollow_form].fetch(:unfollow, [])
 
     ids.each do |id|
-      puts "You are about to delete [#{id}]"
       client.delete("/me/followings/#{id}")
-      begin
-        client.get("/me/followings/#{id}")
-      rescue Soundcloud::ResponseError => e
-        #if e.response.status == '404'
-          puts 'You are not following user 3207', e.response.inspect
-       # end
-      end
+      Rails.logger.info("You no longer follow #{id}")
     end
 
     redirect_to action: :index

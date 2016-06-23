@@ -1,9 +1,7 @@
 class FollowersController < ApplicationController
 
   include SoundcloudTools::Access
-  include SoundcloudTools::Connection
 
-  before_action :authenticate_user!
   before_action :authenticate_user!
 
   def form_factory
