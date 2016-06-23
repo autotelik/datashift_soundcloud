@@ -1,0 +1,17 @@
+<%= form_for(@whitelist_follower) do |f| %>
+  <% if @whitelist_follower.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@whitelist_follower.errors.count, "error") %> prohibited this whitelist_follower from being saved:</h2>
+
+      <ul>
+      <% @whitelist_follower.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

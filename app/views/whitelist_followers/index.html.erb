@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Whitelist Followers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @whitelist_followers.each do |whitelist_follower| %>
+      <tr>
+        <td><%= link_to 'Show', whitelist_follower %></td>
+        <td><%= link_to 'Edit', edit_whitelist_follower_path(whitelist_follower) %></td>
+        <td><%= link_to 'Destroy', whitelist_follower, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Whitelist follower', new_whitelist_follower_path %>
